@@ -1,0 +1,3 @@
+/subsystem=ejb3:write-attribute(name=allow-ejb-name-regex,value=true)
+/subsystem=ejb3:list-add(name=client-interceptors,value={module=org.wildfly.quickstarts.client,class=org.wildfly.quickstarts.client.ClientInterceptor})
+

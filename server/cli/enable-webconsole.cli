@@ -1,0 +1,3 @@
+/core-service=management/management-interface=http-interface:write-attribute(name=console-enabled, value=true)
+/core-service=management/management-interface=http-interface:list-add(name=allowed-origins,value='*') 
+ 

@@ -1,0 +1,1 @@
+/core-service=management/management-interface=http-interface:list-add(name=allowed-origins,value="http://localhost")

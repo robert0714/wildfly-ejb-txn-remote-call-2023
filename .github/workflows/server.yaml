@@ -1,0 +1,43 @@
+name: ejb-txn-remote-call-server images ci
+
+on:
+  push:
+    paths:
+      - 'server/**'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8  
+      - name: Compilling 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./
+        run:  |
+            echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+            mvn install -Pbootable        
+
+      - name: Deploy Server App to Github Container Image Registry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./eejb-txn-remote-call-server/
+        run:  |
+            echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin  
+
+            docker build --build-arg GITHUB_TOKEN=$GITHUB_TOKEN -t ghcr.io/robert0714/eejb-txn-remote-call-server:latest .
+            docker build --build-arg GITHUB_TOKEN=$GITHUB_TOKEN -t ghcr.io/robert0714/eejb-txn-remote-call-server:${{ steps.date.outputs.date }} .
+            docker push ghcr.io/robert0714/eejb-txn-remote-call-server:latest
+            docker push ghcr.io/robert0714/eejb-txn-remote-call-server:${{ steps.date.outputs.date }}                        

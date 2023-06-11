@@ -1,0 +1,3 @@
+/subsystem=ejb3:write-attribute(name=enable-statistics, value=true)
+/subsystem=ejb3/thread-pool=default:read-resource(include-runtime, recursive=true)
+/deployment=*/subsystem=ejb3:read-resource(include-runtime=true, recursive=true) 

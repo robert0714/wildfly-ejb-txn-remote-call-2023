@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sm-ejb-txn-remote-call-server
+spec:
+  selector:
+    matchLabels:
+     application: ejb-txn-remote-call-server
+  endpoints:
+  - path: /metrics
+    port: tcp-9990

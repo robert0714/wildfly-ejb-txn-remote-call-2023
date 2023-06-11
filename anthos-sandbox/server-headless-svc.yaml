@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ejblb-headless-svc
+spec:
+  clusterIP: None
+  ports:
+  - name: tcp-remote
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: tcp-9990
+    port: 9990
+    protocol: TCP
+    targetPort: 9990
+  - name: tcp-7600
+    port: 7600
+    protocol: TCP
+    targetPort: 7600    
+  selector:
+    application: ejb-txn-remote-call-server
+  sessionAffinity: None
+  type: ClusterIP
+ 

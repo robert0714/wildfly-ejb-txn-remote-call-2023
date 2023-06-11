@@ -1,0 +1,111 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name:  deploy-ejb-txn-remote-call-server
+  labels:
+    application: ejb-txn-remote-call-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: ejb-txn-remote-call-server
+  template:
+    metadata:
+      labels:
+        application: ejb-txn-remote-call-server
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+      - name:  ejb-txn-remote-call-server
+        image: 'ghcr.io/robert0714/ejb-txn-remote-call-server:latest'
+        imagePullPolicy: Always
+        ports: 
+            - containerPort: 9990
+              protocol: TCP
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 7600
+              protocol: TCP  
+        env:
+        - name: MEMORY_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName:  ejb-txn-remote-call-server
+              resource: requests.memory
+        - name: MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName:  ejb-txn-remote-call-server
+              resource: limits.memory
+        - name: JAVA_OPTS
+          value: >-
+                -Dwildfly.statistics-enabled=true
+                -Djboss.bind.address=0.0.0.0 
+                -Xms300m 
+                -Xmx600m 
+        - name: TZ
+          value: 'Asia/Taipei'
+        - name: DB_SERVICE_PREFIX_MAPPING
+          value: test-postgresql=TEST  
+        - name: TEST_NONXA
+          value: 'false'
+        - name: TEST_JNDI
+          value: java:jboss/datasources/ejbJtaDs
+        - name: TEST_POSTGRESQL_SERVICE_HOST
+          value: postgresql
+        - name: TEST_POSTGRESQL_SERVICE_PORT
+          value: '5432'
+        - name: TEST_DRIVER
+          value: postgresql
+          
+        - name: TEST_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: postgresql
+              key: database-name
+        - name: TEST_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgresql
+              key: username
+                    
+        resources:
+          requests: 
+            memory: 300Mi
+            cpu: 200m
+          limits: 
+            memory: 700Mi
+            cpu: 400m
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ejb-txn-remote-call-server
+spec:
+  ports:
+  - name: tcp-remote
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: tcp-9990
+    port: 9990
+    protocol: TCP
+    targetPort: 9990
+  selector:  
+    application: ejb-txn-remote-call-server
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sm-ejb-txn-remote-call-server
+spec:
+  selector:
+    matchLabels:
+      application: ejb-txn-remote-call-server
+  endpoints:
+  - path: /metrics
+    port: tcp-9990  

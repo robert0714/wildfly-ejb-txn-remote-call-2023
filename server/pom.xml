@@ -39,7 +39,7 @@
 		<version.exec.plugin>1.2.1</version.exec.plugin>
 		<version.war.plugin>2.1.1</version.war.plugin>
         <version.wildfly.maven.plugin>7.0.2.Final</version.wildfly.maven.plugin>
-		<version.wildfly.datasources.galleon-pack>2.2.1.Final</version.wildfly.datasources.galleon-pack> 
+		<version.wildfly-datasources-galleon-pack>2.2.1.Final</version.wildfly-datasources-galleon-pack>
     </properties>
 
     <repositories>
@@ -223,8 +223,9 @@
 								<layer>jaxrs</layer>
                                 <layer>ejb</layer>
                                 <layer>web-console</layer>
-                                <layer>microprofile-metrics</layer>
+                                <layer>microprofile-metrics</layer>                                
                                 <layer>postgresql-datasource</layer>
+                                <layer>cloud-server</layer>
 							  </layers>
 							  <cloud>
 								  <type>kubernetes</type>

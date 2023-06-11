@@ -234,7 +234,7 @@
 								  <cli-session>
 									  <script-files>
 										  <script>cli/enable-webconsole.cli</script>
-                                          <script>cli/jgroups.cli</script>
+                                          <!-- <script>cli/jgroups.cli</script> -->
 									  </script-files>
 									  <resolve-expressions>false</resolve-expressions>
 								  </cli-session>

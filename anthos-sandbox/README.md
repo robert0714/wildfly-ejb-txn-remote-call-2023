@@ -140,3 +140,7 @@ The DNS server returns three different IPs for the **ejblb-headless-svc.default.
 **Note 1:** with a headless service, clients can connect to its pods by connecting to the service’s DNS name, as they can with regular services. But with headless services, because DNS returns the pods’ IPs, clients connect directly to the pods, instead of through the service proxy.
 
 **Note 2:** Headless services still provide load balancing across pods but through the DNS round-robin mechanism instead of through the service proxy.
+
+# WildFly and Kubernetes - how they play together - DevConf.CZ 2020
+* https://github.com/wildfly/quickstart/tree/26.1.3.Final/ejb-txn-remote-call
+* https://youtu.be/IUJt_wXwjms?t=1037

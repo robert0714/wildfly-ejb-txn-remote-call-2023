@@ -43,6 +43,8 @@ echo "======================================="
 echo "Deploying Postrgress Database"
 kubectl create ns database
 kubectl config set-context --current --namespace database
+kubectl apply -f  "$BASE/010_postgreSQL.yaml"
+kubectl apply -f  "$BASE/secret.yaml"
 
 
 kubectl config set-context --current --namespace default

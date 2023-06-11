@@ -57,8 +57,7 @@ spec:
         - name: TEST_POSTGRESQL_SERVICE_PORT
           value: '5432'
         - name: TEST_DRIVER
-          value: postgresql
-          
+          value: postgresql          
         - name: TEST_DATABASE
           valueFrom:
             secretKeyRef:
@@ -68,8 +67,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: postgresql
-              key: username
-                    
+              key: username                    
         resources:
           requests: 
             memory: 300Mi

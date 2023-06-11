@@ -46,6 +46,32 @@ spec:
                 -Xmx600m 
         - name: TZ
           value: 'Asia/Taipei'
+        - name: POSTGRESQL_SERVICE_HOST
+          value: "postgresql-database-service.database.svc.cluster.local"
+        - name: POSTGRESQL_SERVICE_PORT
+          value: "5432"
+        - name: POSTGRESQL_USER
+          value: "todos"
+        - name: POSTGRESQL_PASSWORD
+          value: "mysecretpassword"
+        - name: POSTGRESQL_DATASOURCE
+          value: "ejbJtaDs"
+        - name: POSTGRESQL_DATABASE
+          value: "todos"          
+        - name: POSTGRESQL_URL 
+          value: "jdbc:postgresql://${env.POSTGRESQL_SERVICE_HOST}:${env.POSTGRESQL_SERVICE_PORT}/${env.POSTGRESQL_DATABASE}"
+        - name: POSTGRESQL_ENABLED 
+          value: "true"                       
+        - name: POSTGRESQL_VALIDATE_ON_MATCH 
+          value: "false"
+        - name: POSTGRESQL_BACKGROUND_VALIDATION 
+          value: "true"          
+        - name: POSTGRESQL_BACKGROUND_VALIDATION_MILLIS
+          value: "60000"                    
+        - name: POSTGRESQL_FLUSH_STRATEGY
+          value: "IdleConnections" 
+        - name: WILDFLY_TRACING_ENABLED
+          value: "true" 
         - name: DB_SERVICE_PREFIX_MAPPING
           value: test-postgresql=TEST  
         - name: TEST_NONXA

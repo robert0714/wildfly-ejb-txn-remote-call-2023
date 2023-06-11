@@ -33,7 +33,7 @@ jobs:
       - name: Deploy Server App to Github Container Image Registry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./eejb-txn-remote-call-server/
+        working-directory: ./server/
         run:  |
             echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin  
 

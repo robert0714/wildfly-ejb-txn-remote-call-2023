@@ -4,15 +4,15 @@ metadata:
   name: ejb-txn-remote-call-server
 spec: 
   applicationImage: 'ghcr.io/robert0714/ejb-txn-remote-call-server:latest'
-  replicas: 1
+  replicas: 2
   bootableJar: true
   resources:
     requests: 
       memory: 300Mi
-      cpu: 200m
+      cpu: 400m
     limits: 
       memory: 700Mi
-      cpu: 400m
+      cpu: 800m
   env:        
         - name: TZ
           value: 'Asia/Taipei'
@@ -44,7 +44,7 @@ spec:
           value: "true"  
         - name: JAVA_OPTS
           value: >- 
-                -javaagent:/app/elastic-apm-agent-1.33.0.jar 
+                -javaagent:/deployments/elastic-apm-agent-1.38.0.jar 
                 -Delastic.apm.server_urls=http://apm.apm.svc.cluster.local:8200
                 -Delastic.apm.service_name=server
                 -Delastic.apm.application_packages=org.jboss.as.quickstarts.ejb.*
@@ -54,8 +54,4 @@ spec:
                 -Djboss.bind.address=0.0.0.0 
                 -Xms300m 
                 -Xmx600m 
-                -Dwildfly.statistics-enabled=true
-                -Dremote.server.host=svc-ejb-txn-remote-call-server
-                -Dremote.server.port=8080
-                -Dremote.server.username=quickstartUser
-                -Dremote.server.password=quickstartPwd1!        
+                -Dwildfly.statistics-enabled=true       

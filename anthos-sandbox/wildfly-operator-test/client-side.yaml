@@ -9,10 +9,10 @@ spec:
   resources:
     requests: 
       memory: 300Mi
-      cpu: 200m
+      cpu: 400m
     limits: 
       memory: 700Mi
-      cpu: 400m
+      cpu: 800m
   env:        
         - name: TZ
           value: 'Asia/Taipei'
@@ -44,7 +44,7 @@ spec:
           value: "true"  
         - name: JAVA_OPTS
           value: >- 
-                -javaagent:/app/elastic-apm-agent-1.33.0.jar 
+                -javaagent:/deployments/elastic-apm-agent-1.38.0.jar 
                 -Delastic.apm.server_urls=http://apm.apm.svc.cluster.local:8200
                 -Delastic.apm.service_name=client
                 -Delastic.apm.application_packages=org.jboss.as.quickstarts.ejb.*

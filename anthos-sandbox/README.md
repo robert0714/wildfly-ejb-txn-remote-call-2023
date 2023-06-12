@@ -25,6 +25,7 @@ kubectl -n apm port-forward svc/kibana   5601
 * Use kubectl port-forward: 
 ```bash
 kubectl  port-forward svc/svc-ejb-txn-remote-call-client  8080
+kubectl  port-forward svc/ejb-txn-remote-call-client-loadbalancer   8080
 ```
 ## Test Approaches
 * Use Anthos Sandbox 's Web Preview

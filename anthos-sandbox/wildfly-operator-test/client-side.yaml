@@ -13,6 +13,7 @@ spec:
     limits: 
       memory: 700Mi
       cpu: 800m
+  disableHTTPRoute: true      
   env:        
         - name: TZ
           value: 'Asia/Taipei'
@@ -58,4 +59,4 @@ spec:
                 -Dremote.server.host=ejb-txn-remote-call-server-headless
                 -Dremote.server.port=8080
                 -Dremote.server.username=quickstartUser
-                -Dremote.server.password=quickstartPwd1!        
+                -Dremote.server.password=quickstartPwd1!

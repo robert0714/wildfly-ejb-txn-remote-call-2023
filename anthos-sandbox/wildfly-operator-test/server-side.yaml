@@ -5,7 +5,7 @@ metadata:
 spec: 
   applicationImage: 'ghcr.io/robert0714/ejb-txn-remote-call-server:latest'
   replicas: 2
-  bootableJar: true
+  bootableJar: true  
   resources:
     requests: 
       memory: 300Mi
@@ -13,6 +13,13 @@ spec:
     limits: 
       memory: 700Mi
       cpu: 800m
+  disableHTTPRoute: true      
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 5Mi      
   env:        
         - name: TZ
           value: 'Asia/Taipei'

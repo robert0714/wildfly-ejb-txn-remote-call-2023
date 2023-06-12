@@ -236,6 +236,8 @@
 								  <layer>ejb-lite</layer>
 								  <layer>jaxrs</layer>
                                   <layer>logging</layer>
+                                  <layer>microprofile-metrics</layer>
+                                  <layer>microprofile-health</layer>
 								  <layer>web-console</layer>
                                   <layer>cloud-server</layer>
 							  </layers>

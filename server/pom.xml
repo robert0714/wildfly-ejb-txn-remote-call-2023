@@ -223,7 +223,8 @@
 								<layer>jaxrs</layer>
                                 <layer>ejb</layer>
                                 <layer>web-console</layer>
-                                <layer>microprofile-metrics</layer>                                
+                                <layer>microprofile-metrics</layer>
+                                <layer>microprofile-health</layer>
                                 <layer>postgresql-datasource</layer>
                                 <layer>cloud-server</layer>
 							  </layers>

@@ -46,8 +46,20 @@ kubectl config set-context --current --namespace database
 kubectl apply -f  "$BASE/010_postgreSQL.yaml"
 kubectl apply -f  "$BASE/secret.yaml"
 
+echo "======================================="
+echo "Deploying APM"
+kubectl create ns apm
+kubectl config set-context --current --namespace apm
+kubectl apply -f  "$BASE/apm-k8s-yml"
 
 kubectl config set-context --current --namespace default
+
+echo "======================================="
+echo "Deploying Wildfly-Operator"
+
+kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/crds/wildfly.org_wildflyservers_crd.yaml 
+kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/operator.yaml
+
 
 echo "======================================="
 echo "Deploying Server Side"

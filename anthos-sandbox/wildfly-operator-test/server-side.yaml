@@ -1,0 +1,61 @@
+apiVersion: wildfly.org/v1alpha1
+kind: WildFlyServer
+metadata:
+  name: ejb-txn-remote-call-server
+spec: 
+  applicationImage: 'ghcr.io/robert0714/ejb-txn-remote-call-server:latest'
+  replicas: 1
+  bootableJar: true
+  resources:
+    requests: 
+      memory: 300Mi
+      cpu: 200m
+    limits: 
+      memory: 700Mi
+      cpu: 400m
+  env:        
+        - name: TZ
+          value: 'Asia/Taipei'
+        - name: POSTGRESQL_SERVICE_HOST
+          value: "postgresql-database-service.database.svc.cluster.local"
+        - name: POSTGRESQL_SERVICE_PORT
+          value: "5432"
+        - name: POSTGRESQL_USER
+          value: "todos"
+        - name: POSTGRESQL_PASSWORD
+          value: "mysecretpassword"
+        - name: POSTGRESQL_DATASOURCE
+          value: "ejbJtaDs"
+        - name: POSTGRESQL_DATABASE
+          value: "todos"          
+        - name: POSTGRESQL_URL 
+          value: "jdbc:postgresql://${env.POSTGRESQL_SERVICE_HOST}:${env.POSTGRESQL_SERVICE_PORT}/${env.POSTGRESQL_DATABASE}"
+        - name: POSTGRESQL_ENABLED 
+          value: "true"                       
+        - name: POSTGRESQL_VALIDATE_ON_MATCH 
+          value: "false"
+        - name: POSTGRESQL_BACKGROUND_VALIDATION 
+          value: "true"          
+        - name: POSTGRESQL_BACKGROUND_VALIDATION_MILLIS
+          value: "60000"                    
+        - name: POSTGRESQL_FLUSH_STRATEGY
+          value: "IdleConnections" 
+        - name: WILDFLY_TRACING_ENABLED
+          value: "true"  
+        - name: JAVA_OPTS
+          value: >- 
+                -javaagent:/app/elastic-apm-agent-1.33.0.jar 
+                -Delastic.apm.server_urls=http://apm.apm.svc.cluster.local:8200
+                -Delastic.apm.service_name=server
+                -Delastic.apm.application_packages=org.jboss.as.quickstarts.ejb.*
+                -Delastic.apm.trace_methods=org.jboss.as.quickstarts.ejb.*
+                -Delastic.apm.trace_methods_duration_threshold=100ms
+                -Delastic.apm.stack_trace_limit=80
+                -Djboss.bind.address=0.0.0.0 
+                -Xms300m 
+                -Xmx600m 
+                -Dwildfly.statistics-enabled=true
+                -Dremote.server.host=svc-ejb-txn-remote-call-server
+                -Dremote.server.port=8080
+                -Dremote.server.username=quickstartUser
+                -Dremote.server.password=quickstartPwd1!        

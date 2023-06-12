@@ -1,0 +1,67 @@
+##https://partners-intl.aliyun.com/help/doc-detail/210065.htm
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:   apm
+spec:
+  selector:
+    matchLabels:
+      component:   apm
+  template:
+    metadata:
+      labels:
+        component:   apm
+    spec:
+      containers:
+      - name:  apm
+        image: docker.elastic.co/apm/apm-server:7.17.10
+        env:
+        - name: apm-server.rum.enabled
+          value: 'true'
+        - name: TZ
+          value: 'Asia/Taipei'
+        - name: apm-server.rum.event_rate.limit
+          value: '1000'
+        - name: ELASTICSEARCH_HOST
+          value: elasticsearch.apm.svc.cluster.local
+        - name: ELASTICSEARCH_PORT
+          value: "9200"        
+        - name: KIBANA_HOST
+          value: kibana.apm.svc.cluster.local
+        - name: KIBANA_PORT
+          value: "5601"
+        ports:
+        - containerPort: 8200
+          name: 'http-8200'
+          protocol: TCP
+        - containerPort: 6060
+          name: 'http-6060'
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 2Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apm
+  labels:
+    service: apm
+spec:
+  type: NodePort
+  selector:
+    component: apm
+  ports:
+  - port: 8200
+    targetPort: 8200
+    name: 'http-8200'
+  - port: 6060
+    targetPort: 6060
+    name: 'http-6060'

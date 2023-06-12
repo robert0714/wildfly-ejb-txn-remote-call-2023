@@ -14,7 +14,7 @@ RUN  apt-get update \
 # FROM adoptopenjdk/openjdk8:x86_64-ubi-jdk8u342-b07
 FROM registry.access.redhat.com/ubi8/openjdk-8:latest
 
-COPY ./target/client-bootable.jar /app/app.jar
+COPY ./target/client-bootable.jar /deployments/app.jar
 WORKDIR /deployments
 
 COPY --from=builder /app0 .

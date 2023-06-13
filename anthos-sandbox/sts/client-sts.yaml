@@ -7,16 +7,14 @@ metadata:
     app.openshift.io/runtime: wildfly  
 spec:
   replicas: 1
+  serviceName: ejb-txn-remote-call-client-headless
   selector:
     matchLabels: 
-      app.kubernetes.io/name: ejb-txn-remote-call-client
-      app.openshift.io/runtime: wildfly
+      app.kubernetes.io/name: ejb-txn-remote-call-client 
   template:
     metadata: 
       labels: 
         app.kubernetes.io/name: ejb-txn-remote-call-client 
-        wildfly.org/operated-by-headless: active
-        wildfly.org/operated-by-loadbalancer: active
       annotations:
         wildfly.org/server-type: bootable-jar
     spec:
@@ -65,7 +63,7 @@ spec:
               value: 'true'
             - name: JAVA_OPTS
               value: >-
-                -javaagent:/app/elastic-apm-agent-1.33.0.jar 
+                -javaagent:/deployments/elastic-apm-agent-1.38.0.jar 
                 -Delastic.apm.server_urls=http://apm.apm.svc.cluster.local:8200
                 -Delastic.apm.service_name=client
                 -Delastic.apm.application_packages=org.jboss.as.quickstarts.ejb.*
@@ -127,7 +125,7 @@ spec:
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
-      serviceName: ejb-txn-remote-call-client-headless
+      
 ---
 kind: Service
 apiVersion: v1

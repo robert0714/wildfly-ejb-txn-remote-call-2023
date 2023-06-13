@@ -2,258 +2,17 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: ejb-txn-remote-call-server
-  namespace: default
-  uid: 5f29d3c5-c264-4cf3-a976-01ce796569b5
-  resourceVersion: '1598'
-  generation: 4
-  creationTimestamp: '2023-06-12T05:16:37Z'
   labels:
-    app.kubernetes.io/managed-by: wildfly-operator
     app.kubernetes.io/name: ejb-txn-remote-call-server
-    app.openshift.io/runtime: wildfly
-  annotations:
-    image.openshift.io/triggers: >-
-      [{ "from": { "kind":"ImageStreamTag",
-      "name":"ghcr.io/robert0714/ejb-txn-remote-call-server:latest"},
-      "fieldPath":
-      "spec.template.spec.containers[?(@.name==\"ejb-txn-remote-call-server\")].image"}]
-    wildfly.org/wildfly-server-generation: '2'
-  ownerReferences:
-    - apiVersion: wildfly.org/v1alpha1
-      kind: WildFlyServer
-      name: ejb-txn-remote-call-server
-      uid: 5abc9e51-15b1-4dae-8ccf-51a1fb70bd25
-      controller: true
-      blockOwnerDeletion: true
-  managedFields:
-    - manager: wildfly-operator
-      operation: Update
-      apiVersion: apps/v1
-      time: '2023-06-12T05:31:01Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:image.openshift.io/triggers: {}
-            f:wildfly.org/wildfly-server-generation: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:app.kubernetes.io/name: {}
-            f:app.openshift.io/runtime: {}
-          f:ownerReferences:
-            .: {}
-            k:{"uid":"5abc9e51-15b1-4dae-8ccf-51a1fb70bd25"}: {}
-        f:spec:
-          f:podManagementPolicy: {}
-          f:replicas: {}
-          f:revisionHistoryLimit: {}
-          f:selector: {}
-          f:serviceName: {}
-          f:template:
-            f:metadata:
-              f:annotations:
-                .: {}
-                f:wildfly.org/server-type: {}
-              f:labels:
-                .: {}
-                f:app.kubernetes.io/managed-by: {}
-                f:app.kubernetes.io/name: {}
-                f:app.openshift.io/runtime: {}
-                f:wildfly.org/operated-by-headless: {}
-                f:wildfly.org/operated-by-loadbalancer: {}
-            f:spec:
-              f:containers:
-                k:{"name":"ejb-txn-remote-call-server"}:
-                  .: {}
-                  f:env:
-                    .: {}
-                    k:{"name":"JAVA_ARGS"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"JAVA_OPTS"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"JBOSS_HOME"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"KUBERNETES_LABELS"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"KUBERNETES_NAMESPACE"}:
-                      .: {}
-                      f:name: {}
-                      f:valueFrom:
-                        .: {}
-                        f:fieldRef: {}
-                    k:{"name":"POSTGRESQL_BACKGROUND_VALIDATION"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_BACKGROUND_VALIDATION_MILLIS"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_DATABASE"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_DATASOURCE"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_ENABLED"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_FLUSH_STRATEGY"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_PASSWORD"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_SERVICE_HOST"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_SERVICE_PORT"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_URL"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_USER"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"POSTGRESQL_VALIDATE_ON_MATCH"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"STATEFULSET_HEADLESS_SERVICE_NAME"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"TZ"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                    k:{"name":"WILDFLY_TRACING_ENABLED"}:
-                      .: {}
-                      f:name: {}
-                      f:value: {}
-                  f:image: {}
-                  f:imagePullPolicy: {}
-                  f:livenessProbe:
-                    .: {}
-                    f:failureThreshold: {}
-                    f:httpGet:
-                      .: {}
-                      f:path: {}
-                      f:port: {}
-                      f:scheme: {}
-                    f:initialDelaySeconds: {}
-                    f:periodSeconds: {}
-                    f:successThreshold: {}
-                    f:timeoutSeconds: {}
-                  f:name: {}
-                  f:ports:
-                    .: {}
-                    k:{"containerPort":8080,"protocol":"TCP"}:
-                      .: {}
-                      f:containerPort: {}
-                      f:name: {}
-                      f:protocol: {}
-                    k:{"containerPort":9990,"protocol":"TCP"}:
-                      .: {}
-                      f:containerPort: {}
-                      f:name: {}
-                      f:protocol: {}
-                  f:readinessProbe:
-                    .: {}
-                    f:failureThreshold: {}
-                    f:httpGet:
-                      .: {}
-                      f:path: {}
-                      f:port: {}
-                      f:scheme: {}
-                    f:initialDelaySeconds: {}
-                    f:periodSeconds: {}
-                    f:successThreshold: {}
-                    f:timeoutSeconds: {}
-                  f:resources:
-                    .: {}
-                    f:limits:
-                      .: {}
-                      f:cpu: {}
-                      f:memory: {}
-                    f:requests:
-                      .: {}
-                      f:cpu: {}
-                      f:memory: {}
-                  f:terminationMessagePath: {}
-                  f:terminationMessagePolicy: {}
-                  f:volumeMounts:
-                    .: {}
-                    k:{"mountPath":"/opt/jboss/container/wildfly-bootable-jar-data/standalone/data"}:
-                      .: {}
-                      f:mountPath: {}
-                      f:name: {}
-              f:dnsPolicy: {}
-              f:restartPolicy: {}
-              f:schedulerName: {}
-              f:securityContext: {}
-              f:terminationGracePeriodSeconds: {}
-              f:volumes:
-                .: {}
-                k:{"name":"ejb-txn-remote-call-server-volume"}:
-                  .: {}
-                  f:emptyDir: {}
-                  f:name: {}
-          f:updateStrategy:
-            f:rollingUpdate:
-              .: {}
-              f:partition: {}
-            f:type: {}
-    - manager: kube-controller-manager
-      operation: Update
-      apiVersion: apps/v1
-      time: '2023-06-12T05:33:28Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:status:
-          f:availableReplicas: {}
-          f:currentReplicas: {}
-          f:observedGeneration: {}
-          f:readyReplicas: {}
-          f:replicas: {}
-          f:updatedReplicas: {}
-      subresource: status
 spec:
   replicas: 2
   selector:
-    matchLabels:
-      app.kubernetes.io/managed-by: wildfly-operator
-      app.kubernetes.io/name: ejb-txn-remote-call-server
-      app.openshift.io/runtime: wildfly
+    matchLabels: 
+      app.kubernetes.io/name: ejb-txn-remote-call-server 
   template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app.kubernetes.io/managed-by: wildfly-operator
+    metadata: 
+      labels: 
         app.kubernetes.io/name: ejb-txn-remote-call-server
-        app.openshift.io/runtime: wildfly
-        wildfly.org/operated-by-headless: active
-        wildfly.org/operated-by-loadbalancer: active
       annotations:
         wildfly.org/server-type: bootable-jar
     spec:
@@ -302,7 +61,7 @@ spec:
               value: 'true'
             - name: JAVA_OPTS
               value: >-
-                -javaagent:/app/elastic-apm-agent-1.33.0.jar 
+                -javaagent:/deployments/elastic-apm-agent-1.38.0.jar 
                 -Delastic.apm.server_urls=http://apm.apm.svc.cluster.local:8200
                 -Delastic.apm.service_name=server
                 -Delastic.apm.application_packages=org.jboss.as.quickstarts.ejb.*
@@ -315,9 +74,6 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
-            - name: KUBERNETES_LABELS
-              value: >-
-                app.kubernetes.io/managed-by=wildfly-operator,app.kubernetes.io/name=ejb-txn-remote-call-server,app.openshift.io/runtime=wildfly
             - name: STATEFULSET_HEADLESS_SERVICE_NAME
               value: ejb-txn-remote-call-server-headless
             - name: JAVA_ARGS
@@ -365,6 +121,18 @@ spec:
       securityContext: {}
       schedulerName: default-scheduler
   serviceName: ejb-txn-remote-call-server-headless
+  volumeClaimTemplates:
+    - kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+        name: ejb-txn-remote-call-server-volume 
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Mi
+        volumeMode: Filesystem
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate 
@@ -375,7 +143,7 @@ apiVersion: v1
 metadata:
   name: ejb-txn-remote-call-server-admin
   labels:
-    app.kubernetes.io/name: ejb-txn-remote-call-server'
+    app.kubernetes.io/name: ejb-txn-remote-call-server
 spec:
   ports:
     - name: admin

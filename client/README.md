@@ -7,3 +7,21 @@ Table 2. HTTP endpoints of the test invocation
 | http://localhost:8080/client/direct-stateless                | Two invocations under the transaction context started on server1 (client application). The stateless bean is invoked on the remote side. The EJB remote call is configured from data in the client application source code. The remote invocation is run via the EJB remoting protocol.                                                                                                                                                                                                                                                                                                                                                                        | The returned hostnames must be the same.                                                   |
 | http://localhost:8080/client/direct-stateless-http           | Two invocations under the transaction context started on server1 (client application). The stateless bean is invoked on the remote side. The EJB remote call is configured from data in the client application source code. The remote invocation is run, unlike the other calls of this quickstarts, via EJB over HTTP.                                                                                                                                                                                                                                                                                                                                       | The returned hostnames must be the same.                                                   |
 | http://localhost:8080/client/remote-outbound-fail-stateless  | An invocation under the transaction context started on server1 (client application). The call goes to one of the remote servers, where errors occur during transaction processing. The failure is simulated at time of two-phase commit. This HTTP call finishes with success. Only the server log shows some warnings. This is an expected behaviour. An intermittent failure during commit phase of two-phase protocol makes the transaction manager obliged to finish the work eventually. The finalization of work is done in the background (by Narayana recovery manager, see details below), and the HTTP call may inform the client back with success. | When the recovery manager finishes the work all the transaction resources are committed.   |
+
+
+
+# Jkube
+* Intrudtion: 
+  * https://www.mastertheboss.com/eclipse/eclipse-microservices/how-to-deploy-wildfly-bootable-jar-on-openshift/
+  * https://www.eclipse.org/jkube/
+    * https://www.eclipse.org/jkube/docs/kubernetes-maven-plugin/#jkube:build
+* example code : 
+  * https://github.com/eclipse/jkube/blob/master/quickstarts/maven/docker-file-simple/README.md
+  * https://github.com/eclipse/jkube/blob/master/quickstarts/maven/docker-file-provided/pom.xml  
+  * https://github.com/mvocale/JBoss_EAP_cloud_ready/blob/JKube_Galleon_Runtime_EAP_XP_bootable_jar_version/weather-app-eap-cloud-ready/pom.xml
+  df
+
+```bash
+mvn clean package -Pbootable  k8s:build
+mvn clean package org.eclipse.jkube:kubernetes-maven-plugin:build
+```

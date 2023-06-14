@@ -38,6 +38,8 @@
 		<version.war.plugin>2.1.1</version.war.plugin>
         <version.wildfly.maven.plugin>7.0.2.Final</version.wildfly.maven.plugin> 
         <version.wildfly-datasources-galleon-pack>2.2.1.Final</version.wildfly-datasources-galleon-pack>
+        <jkube.version>1.12.0</jkube.version>
+        <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
     </properties>
 
     <repositories>
@@ -268,8 +270,25 @@
 								  </goals>
 							  </execution>					
 						  </executions>
-					  </plugin> 
-				  </plugins>
+					    </plugin>
+                        <plugin>
+                            <groupId>org.eclipse.jkube</groupId>
+                            <artifactId>kubernetes-maven-plugin</artifactId>
+                            <version>${jkube.version}</version>
+                            <configuration>
+                                <images>
+                                    <image>
+                                        <name>ghcr.io/robert0714/ejb-txn-remote-call-client</name>
+                                        <build>
+                                           <!-- refer: https://github.com/mvocale/JBoss_EAP_cloud_ready/blob/JKube_Galleon_Runtime_EAP_XP_bootable_jar_version/weather-app-eap-cloud-ready/pom.xml -->
+                                           <dockerFile>src/main/docker/Dockerfile01</dockerFile>
+                                           <contextDir>${project.basedir}</contextDir> 
+                                        </build>   
+                                    </image> 
+                                </images>
+                            </configuration>
+                        </plugin>
+                    </plugins>                       
 			  </build>            
 		  </profile> 
 	</profiles>

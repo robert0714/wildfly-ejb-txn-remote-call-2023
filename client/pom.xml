@@ -134,34 +134,48 @@
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Import the JTA API -->
+        <!-- Import the EJB Wildfly Client -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-ejb-client</artifactId>
+			<version>4.0.52.Final</version>
+		</dependency>
+		<!-- Import the JTA API -->
         <dependency>
-            <groupId>org.jboss.spec.javax.transaction</groupId>
-            <artifactId>jboss-transaction-api_1.3_spec</artifactId>
+            <groupId>
+				org.jboss.spec.javax.transaction</groupId>
+            <artifactId>
+				jboss-transaction-api_1.3_spec</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <!-- Import the JPA/Hibernate API -->
+		</dependency>
+		<!-- Import the JPA/Hibernate API -->
         <dependency>
-            <groupId>jakarta.persistence</groupId>
+            <groupId>
+				jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Import JAX-B JSON API -->
+            <scope>
+				provided</scope>
+		</dependency>
+		<!-- Import JAX-B JSON API -->
         <dependency>
-            <groupId>org.jboss.spec.javax.xml.bind</groupId>
+            <groupId>
+				org.jboss.spec.javax.xml.bind</groupId>
             <artifactId>jboss-jaxb-api_2.3_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Import logging by JBoss -->
+            <scope>
+				provided</scope>
+		</dependency>
+		<!-- Import logging by JBoss -->
         <dependency>
             <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
+            <artifactId>
+				jboss-logging</artifactId>
             <scope>provided</scope>
-        </dependency>
+		</dependency>
         <dependency>
-            <groupId>org.jboss.spec.javax.jms</groupId>
+            <groupId>
+				org.jboss.spec.javax.jms</groupId>
             <artifactId>jboss-jms-api_2.0_spec</artifactId>
-        </dependency>
+		</dependency>
     </dependencies>
 
     <build>

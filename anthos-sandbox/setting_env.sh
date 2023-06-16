@@ -57,8 +57,8 @@ kubectl config set-context --current --namespace default
 echo "======================================="
 echo "Deploying Wildfly-Operator"
 
-kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/crds/wildfly.org_wildflyservers_crd.yaml 
-kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/operator.yaml
+# kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/crds/wildfly.org_wildflyservers_crd.yaml 
+# kubectl apply -f $BASE/wildfly-operator-0.5.6/deploy/operator.yaml
 
 
 echo "======================================="

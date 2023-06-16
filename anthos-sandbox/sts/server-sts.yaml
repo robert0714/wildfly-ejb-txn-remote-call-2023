@@ -29,6 +29,12 @@ spec:
             - name: admin
               containerPort: 9990
               protocol: TCP
+            - name: jqroup
+              containerPort: 7600
+              protocol: TCP
+            - name: recovery
+              containerPort: 4712
+              protocol: TCP              
           env:
             - name: TZ
               value: Asia/Taipei
@@ -197,6 +203,14 @@ spec:
       protocol: TCP
       port: 8080
       targetPort: 8080
+    - name: tcp-7600
+      protocol: TCP
+      port: 7600
+      targetPort: 7600
+    - name: tcp-4712
+      protocol: TCP
+      port: 4712
+      targetPort: 4712       
   selector: 
     app.kubernetes.io/name: ejb-txn-remote-call-server
   clusterIP: None

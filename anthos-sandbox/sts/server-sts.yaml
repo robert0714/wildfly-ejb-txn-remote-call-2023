@@ -167,12 +167,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: ejb-txn-remote-call-server-loadbalancer
-  labels:
-    app.kubernetes.io/managed-by: wildfly-operator
-    app.kubernetes.io/name: ejb-txn-remote-call-server
-    app.openshift.io/runtime: wildfly
-    wildfly.org/operated-by-headless: active
-    wildfly.org/operated-by-loadbalancer: active
+  labels: 
+    app.kubernetes.io/name: ejb-txn-remote-call-server 
 spec:
   ports:
     - name: http

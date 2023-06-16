@@ -74,7 +74,17 @@ spec:
                 -Dremote.server.host=ejb-txn-remote-call-server-headless
                 -Dremote.server.port=8080
                 -Dremote.server.username=quickstartUser
-                -Dremote.server.password=quickstartPwd1!        
+                -Dremote.server.password=quickstartPwd1! 
+                -Drmote.ejb.hostsAndPorts[0]=ejb-txn-remote-call-server-0.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[1]=ejb-txn-remote-call-server-1.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[2]=ejb-txn-remote-call-server-2.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[3]=ejb-txn-remote-call-server-3.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[4]=ejb-txn-remote-call-server-4.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[5]=ejb-txn-remote-call-server-5.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[6]=ejb-txn-remote-call-server-6.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[7]=ejb-txn-remote-call-server-7.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[8]=ejb-txn-remote-call-server-8.ejb-txn-remote-call-server-headless:8080
+                -Drmote.ejb.hostsAndPorts[9]=ejb-txn-remote-call-server-9.ejb-txn-remote-call-server-headless:8080      
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:

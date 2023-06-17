@@ -111,6 +111,20 @@
     </dependencyManagement>
 
     <dependencies>
+		<!-- Import the EJB Wildfly Client -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-ejb-client</artifactId>
+			<version>4.0.52.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version>
+		</dependency>
+		
         <!-- Import the WS/JAX-RS -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>

@@ -58,11 +58,19 @@ public class RestEndpoints {
     public List<String> toStatelessDirect() throws Exception {
         return remoteCaller.directLookupStatelessBeanOverEjbRemotingCall();
     }
+    
     @GET
     @Path("/direct-stateless-node-selector")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> toStatelessDirectNodeSelector() throws Exception {
         return remoteCaller.directLookupStatelessBeanOverEjbRemotingCallByNodeSelector();
+    }
+    
+    @GET
+    @Path("/direct-stateless-node-selector-exp-01")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> toStatelessDirectNodeSelectorExp01() throws Exception {
+        return remoteCaller.directLookupStatelessBeanOverEjbRemotingCallByNodeSelectorExp01();
     }
 
     @GET

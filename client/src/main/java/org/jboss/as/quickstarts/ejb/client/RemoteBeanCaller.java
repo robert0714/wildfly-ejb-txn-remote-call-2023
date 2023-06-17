@@ -27,6 +27,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.as.quickstarts.ejb.client.node.selector.RemoteLookupByNodeSelector;
 import org.jboss.as.quickstarts.ejb.entity.CallerUser;
 import org.jboss.as.quickstarts.ejb.server.RemoteBeanInterface;
+import org.jboss.as.quickstarts.ejb.server.experiment.nested.ejbcall.RemoteBeanEx01StartInterface;
 import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
@@ -149,20 +150,7 @@ public class RemoteBeanCaller {
                 bean.successOnCall()
         );
     }
-    protected String[] getHostsAndPortsFromJavaOpts() {
-		String template = "rmote.ejb.hostsAndPorts[%d]";
-		List<String> result = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			String propsName = String.format(template, i);
-//			String host =System.getProperty("rmote.ejb.hostsAndPorts[0]");
-			String value = System.getProperty(propsName);
-			if (value != null && value.length() > 0) {
-				result.add(value);
-			}
-		}
-		return result.toArray(new String[] {});
-
-	}
+    
     /**
      * This is the same invocation as for {@link #directLookupStatelessBeanOverEjbRemotingCall}.
      * The difference is that there is used Node Selector for EJB load balancing calls.  
@@ -172,13 +160,35 @@ public class RemoteBeanCaller {
      * @throws NamingException when remote lookup fails
      */
     public List<String> directLookupStatelessBeanOverEjbRemotingCallByNodeSelector() throws NamingException {
-        log.debugf("Calling direct lookup with transaction to StatelessBean.successOnCall()");
+        log.debugf("Calling direct lookup with transaction to StatelessBean.successOnCall() by Node Selector");
 
-        String[] hostsAndPorts = getHostsAndPortsFromJavaOpts();
+        String[] hostsAndPorts = RemoteLookupByNodeSelector.getHostsAndPortsFromJavaOpts();
         String remoteUsername = System.getProperty("remote.server.username");
         String remotePassword = System.getProperty("remote.server.password");
 
         RemoteBeanInterface bean = RemoteLookupByNodeSelector.lookupRemoteEJBDirect("StatelessBean", RemoteBeanInterface.class, false,
+        		hostsAndPorts, remoteUsername, remotePassword );
+        return Arrays.asList(
+                bean.successOnCall(),
+                bean.successOnCall()
+        );
+    }
+    /**
+     * This is the same invocation as for {@link #directLookupStatelessBeanOverEjbRemotingCall}.
+     * The difference is that there is used Node Selector for EJB load balancing calls.  
+     *
+     * @return list of strings as return values from the remote beans,
+     *         in this case the return values are hostname and the jboss node names of the remote application server
+     * @throws NamingException when remote lookup fails
+     */
+    public List<String> directLookupStatelessBeanOverEjbRemotingCallByNodeSelectorExp01() throws NamingException {
+        log.debugf("Calling direct lookup with transaction to StatelessBean.successOnCall() by Node Selector Exp 01");
+
+        String[] hostsAndPorts = RemoteLookupByNodeSelector.getHostsAndPortsFromJavaOpts();
+        String remoteUsername = System.getProperty("remote.server.username");
+        String remotePassword = System.getProperty("remote.server.password");
+
+        RemoteBeanEx01StartInterface bean = RemoteLookupByNodeSelector.lookupRemoteEJBDirect("StatelessBeanEx01Start", RemoteBeanEx01StartInterface.class, false,
         		hostsAndPorts, remoteUsername, remotePassword );
         return Arrays.asList(
                 bean.successOnCall(),

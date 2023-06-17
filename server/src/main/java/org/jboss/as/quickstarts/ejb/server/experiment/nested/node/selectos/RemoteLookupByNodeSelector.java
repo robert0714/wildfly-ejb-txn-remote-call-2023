@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.as.quickstarts.ejb.client.node.selector;
+package org.jboss.as.quickstarts.ejb.server.experiment.nested.node.selectos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +118,7 @@ public class RemoteLookupByNodeSelector {
         return (T) context.lookup("ejb:/" + REMOTE_DEPLOYMENT_NAME + "/" + beanImplName + "!"
                 + remoteInterface.getName() + (isStateful ? "?stateful" : ""));
     }
+    
     public static String[] getHostsAndPortsFromJavaOpts() {
 		String template = "rmote.ejb.hostsAndPorts[%d]";
 		List<String> result = new ArrayList<>();

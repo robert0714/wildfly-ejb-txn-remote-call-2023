@@ -42,7 +42,7 @@ kubectl  port-forward svc/ejb-txn-remote-call-client-loadbalancer   8080
   siege -c 100 -r 200 -d1 'http://localhost:8080/client/direct-stateless-http'
   siege -c 100 -r 200 -d1 'http://localhost:8080/client/remote-outbound-fail-stateless'
   siege -c 100 -r 200 -d1 'http://localhost:8080/client/direct-stateless-node-selector'
-  siege -c 100 -r 200 -d1 'http://localhost:8080/client//direct-stateless-node-selector-exp-01'
+  siege -c 100 -r 200 -d1 'http://localhost:8080/client/direct-stateless-node-selector-exp-01'
   ```
  * Use ``curl``
   ```bash  
@@ -52,7 +52,7 @@ kubectl  port-forward svc/ejb-txn-remote-call-client-loadbalancer   8080
   curl 'http://localhost:8080/client/direct-stateless-http' |jq .
   curl 'http://localhost:8080/client/remote-outbound-fail-stateless'
   curl 'http://localhost:8080/client/direct-stateless-node-selector'  |jq .
-  curl 'http://localhost:8080/client//direct-stateless-node-selector-exp-01' 
+  curl 'http://localhost:8080/client/direct-stateless-node-selector-exp-01' 
   ```
 ## Using Headless Service Approaches  
 * With a Headless Service, clients can connect to it’s pods by connecting to the service’s DNS name. But using headless services, DNS returns the pod’s IPs and client can connect directly to the pods instead via the service proxy.

@@ -66,22 +66,26 @@ public class StatelessBeanEx01Start implements RemoteBeanEx01StartInterface {
     public String successOnCall() {
         log.debugf("Called '%s.successOnCall()' with transaction status %s",
                 this.getClass().getName(), InfoUtils.getTransactionStatus());
-        StringBuffer sbf = new StringBuffer();
+        StringBuffer sbf = new StringBuffer("***Before Self Ejb call**** ,");
         // transaction enlists XAResource #1
         try {
         	List<String> endRepsonses = selfCaller.directLookupStatelessBeanOverEjbRemotingCallByNodeSelector();
 			if (endRepsonses != null && endRepsonses.size() > 0) {
 				sbf.append( StringUtils.join(endRepsonses,".") );
 			}
+			sbf.append("***After Self Ejb call**** ,");
+			sbf.append("***Before transaction enlists XAResource #1**** ,");
             tm.getTransaction().enlistResource(new MockXAResource());
         } catch(SystemException | RollbackException | NamingException sre) {
             throw new IllegalStateException("Cannot enlist a " + MockXAResource.class.getName() + " to the current transaction", sre);
         }
+        sbf.append("***After transaction enlists XAResource #1**** ,");
+        sbf.append("***Before transaction enlists XAResource #2**** ,");
         // transaction enlists XAResource #2
         em.persist(new CalleeUser("Bard", "The Bowman"));
-
         sbf.append( InfoUtils.getHostInfo() );
         
+        sbf.append("***After transaction enlists XAResource #2**** ,");
         return sbf.toString();
     }
 
